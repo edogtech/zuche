@@ -1,0 +1,57 @@
+<extend name="Public/base" />
+<block name="title">修改车辆</block>
+<block name="content">
+	<div class="row">
+		<div class="col-md-6">
+			<form action="{:U('Car/do_modify_car')}" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label>品牌</label>
+					<select class="form-control" name="brand_id">
+
+						<volist name="brand" id="vo">
+						<option value="{$vo['id']}"  {:$vo['id']==$info['brand_id']?"selected":'';}>{$vo['name']}</option>
+						</volist>
+
+					</select>
+				</div>
+				<br />
+				<div class="form-group">
+					<label>型号</label>
+					<select class="form-control" name="model_id">
+
+						<volist name="model" id="vo">
+						<option value="{$vo['id']}" {:$vo['id']==$info['model_id']?"selected":'';} >{$vo['name']}</option>
+						</volist>
+
+					</select>
+				</div>
+				<br />
+				<div class="form-group">
+					<label>站点</label>
+					<select class="form-control" name="station_id">
+
+						<volist name="station" id="vo">
+						<option value="{$vo['id']}" {:$vo['id']==$info['station_id']?"selected":'';}>{$vo['name']}</option>
+						</volist>
+
+					</select>
+				</div>
+				<br />
+				<div class="form-group">
+					<label>车牌号</label>
+					<input class="form-control" name="plate" value="{$info['plate']}">
+					<p class="help-block">请输入车牌号</p>
+				</div>
+
+				<div class="form-group">
+					<label>价格</label>
+					<input class="form-control" name="price" value="{$info['price']}">
+					<p class="help-block">请输入车辆出租价格(每小时)</p>
+				</div>
+				<input class="form-control" type="hidden" name="id" value="{$_GET['id']}">
+				<button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>
+				<button type="reset" class="btn btn-outline btn-primary btn-lg btn-block">重置</button>
+			</form>
+		</div>
+	</div>
+</block>

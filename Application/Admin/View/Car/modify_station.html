@@ -1,0 +1,96 @@
+﻿<extend name="Public/base" />
+<block name="title">修改站点</block>
+<block name="content">
+	<div class="row">
+		<div class="col-md-6">
+			<form action="{:U('Car/do_modify_station')}" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label>本站点的地址是 {$info['province']} {$info['city']} {$info['county']}</label>
+					<br/>
+					<label class="checkbox-inline">
+						<input type="checkbox" name="check_area[]" value="y">是否修改站点的地区
+					</label>
+				</div>
+				<div class="form-group check_area" style="display:none">
+					<label>省</label>
+					<select class="form-control" name="province" id="province">
+						<option value="">--请选择--</option>
+						<volist name="data" id="vo">
+							<option data="{$vo['id']}" value="{$vo['name']}">{$vo['name']}</option>
+						</volist>
+
+					</select>
+				</div>
+				<div class="form-group check_area" style="display:none">
+					<label>市</label>
+					<select class="form-control" name="city" id="city">
+						<option value="">--请选择--</option>
+					</select>
+				</div>
+				<div class="form-group check_area" style="display:none">
+					<label>区/县</label>
+					<select class="form-control" name="county" id="county">
+						<option value="">--请选择--</option>
+					</select>
+					<p class="help-block">若下一级地区菜单无内容,请切换上级菜单的地址再切换回来</p>
+				</div>
+				<br />
+				<div class="form-group">
+					<label>站点名称</label>
+					<input class="form-control" name="name" value="{$info['name']}">
+					<p class="help-block">请输入站点名称</p>
+				</div>
+				<div class="form-group">
+					<label>站点地址</label>
+					<input class="form-control" name="address" value="{$info['address']}">
+					<p class="help-block">请输入站点地址</p>
+				</div>
+				<div class="form-group">
+					<label>站点电话</label>
+					<input class="form-control" name="phone" value="{$info['phone']}">
+					<p class="help-block">请输入站点电话</p>
+				</div>
+				<div class="form-group">
+					<label>站点经度</label>
+					<input class="form-control" name="lng" value="{$info['lng']}">
+					<p class="help-block">请输入站点经度</p>
+				</div>
+				<div class="form-group">
+					<label>站点纬度</label>
+					<input class="form-control" name="lat" value="{$info['lat']}">
+					<p class="help-block">请输入站点纬度</p>
+				</div>
+				<br />
+				<br />
+				<br />
+				<div class="form-group">
+					<label>围栏最大经度</label>
+					<input class="form-control" name="lng_max" value="{$info['lng_max']}">
+					<p class="help-block">请输入最大经度</p>
+				</div>
+				<div class="form-group">
+					<label>围栏最小经度</label>
+					<input class="form-control" name="lng_min" value="{$info['lng_min']}">
+					<p class="help-block">请输入最小经度</p>
+				</div>
+				<div class="form-group">
+					<label>围栏最大纬度</label>
+					<input class="form-control" name="lat_max" value="{$info['lat_max']}">
+					<p class="help-block">请输入最大纬度</p>
+				</div>
+				<div class="form-group">
+					<label>围栏最小纬度</label>
+					<input class="form-control" name="lat_min" value="{$info['lat_min']}">
+					<p class="help-block">请输入最小纬度</p>
+				</div>
+				<br />
+				<br />
+				<br />
+				<input type="hidden" name="id" value="{$info['id']}">
+				<p class="help-block" style="color:orange;">请务必选择和输入完整信息，否则无法添加</p>
+				<button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>
+				<button type="reset" class="btn btn-outline btn-primary btn-lg btn-block">重置</button>
+			</form>
+		</div>
+	</div>
+</block>

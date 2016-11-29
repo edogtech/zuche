@@ -1,0 +1,165 @@
+﻿<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+          
+            <li>
+                <a href="{:U('Index/index')}">
+                    <i class="fa fa-home fa-fw"></i>
+                    主页
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-group fa-fw"></i>
+                    租车用户管理
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{:U('User/userlist')}">用户列表</a>
+                    </li>
+		    <li>
+                        <a href="{:U('User/deposit_list')}">保证金状态</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-car fa-fw"></i>
+                    车辆与站点
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{:U('Car/station')}">站点管理</a>
+                    </li>
+                    <li>
+                        <a href="{:U('Car/brand')}">车辆品牌管理</a>
+                    </li>
+                    <li>
+                        <a href="{:U('Car/model')}">车辆型号管理</a>
+                    </li>
+                    <li>
+                        <a href="{:U('Car/car')}">车辆管理</a>
+                    </li>
+                </ul>
+            </li>
+			<li>
+				<a href="#"> 
+					<i class="fa fa-tasks fa-fw"></i>
+                    订单信息
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{:U('Orders/index')}">订单列表</a>
+                    </li>
+                    <!--<li>
+                        <a href="{:U('Refund/index')}">退款审核</a>
+                    </li>-->
+                </ul>
+			</li>
+			<li>
+				<a href="#"> 
+					<i class="fa fa-th-list fa-fw"></i>
+                    APP轮播图
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{:U('Carousel/index')}">轮播图维护</a>
+                    </li>
+                </ul>
+			</li>
+			<li>
+				<a href="#"> 
+					<i class="glyphicon glyphicon-wrench fa-fw"></i>
+                    租车管理
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{:U('RentInfo/index')}">租车信息列表</a>
+                    </li>
+                    <li>
+                        <a href="{:U('RentOvertime/index')}">超时用车记录</a>
+                    </li>
+                    <li>
+                        <a href="{:U('RentLong/index')}">长租信息管理</a>
+                    </li>
+                    <li>
+                        <a href="{:U('CarPhoto/photolist')}">车辆拍照记录</a>
+                    </li>                     
+                </ul>
+			</li>
+			<li>
+				<a href="#"> 
+					<i class="fa  fa-user fa-fw"></i>
+                    账号管理
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                	<li>
+                        <a href="{:U('AdminUser/modifyPwdForm')}">修改密码</a>
+                    </li>
+                </ul>
+			</li>			
+			
+			<li>
+				<a href="#"> 
+					<i class="fa fa-desktop fa-fw"></i>
+                    系统维护
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                	<li>
+                        <a href="{:U('AdminUser/index')}">系统用户</a>
+                    </li>
+                    <!--<li>
+                        <a href="#">权限管理</a>
+                    </li> -->
+                    <li>
+                        <a href="{:U('Parameter/index')}">参数设置</a>
+                    </li>
+                    <li>
+                        <a href="{:U('AdminUser/save')}">数据备份</a>
+                    </li>                     
+                </ul>
+			</li>
+			<li>
+                <a href="#">
+                    <i class="fa fa-plus-circle fa-fw"></i>
+                    业务办理
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{:U('Business/index')}">长租办理</a>
+                    </li>
+                    <li>
+                        <a href="{:U('Business/return_car')}">长租还车</a>
+                    </li>                     
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="glyphicon glyphicon-cog fa-fw"></i>
+                    权限管理
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{:U('Auth/admin_list')}">管理员列表</a>
+                    </li>
+                    <li>
+                        <a href="{:U('Auth/auth_list')}">权限列表</a>
+                    </li>
+                    <li>
+                        <a href="{:U('Auth/group_list')}">权限组列表</a>
+                    </li>             
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>

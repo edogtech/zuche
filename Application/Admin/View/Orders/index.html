@@ -1,0 +1,165 @@
+<extend name="Public/base" />
+<block name="title">订单列表</block>
+<block name="content">
+	<div class="row">
+		<form method="get" action="{:U('Orders/index')}">
+		<div class="col-md-3">
+			<div class="form-group">
+				订单号:
+				<input class="form-control" style="display:inline;width:70%;" type="text" name="order_number" id="orderno" value="{:isset($_GET['order_number'])?$_GET['order_number']:'';}"></div>
+		</div>
+		<div class="col-md-6">
+			下单时间：<input style="display:inline;width:35%;height:34px;" placeholder="请选择日期" class="laydate-icon form-control" name="dtpickerA" value="{:isset($_GET['dtpickerA'])?$_GET['dtpickerA']:'';}" onclick="laydate()"> 至 <input placeholder="请选择日期" class="laydate-icon form-control" name="dtpickerB" value="{:isset($_GET['dtpickerB'])?$_GET['dtpickerB']:'';}" onclick="laydate()" style="display:inline;width:35%;height:34px;">
+		</div> 
+		<div  class="col-md-3">
+			支付状态:
+			<select style="display:inline;width:70%;" class="form-control" name="paytype" id="paytype">
+				<option value="" {:empty($_GET['paytype'])?"selected":'';} >全部</option>
+				<option value="0" {:$_GET['paytype']=='0'?"selected":'';} >未支付</option>
+				<option value="1" {:$_GET['paytype']=='1'?"selected":'';} >已付定金</option>
+				<option value="2" {:$_GET['paytype']=='2'?"selected":'';} >待结算</option>
+				<option value="3" {:$_GET['paytype']=='2'?"selected":'';} >已结算</option>
+				<option value="4" {:$_GET['paytype']=='2'?"selected":'';} >待退款</option>
+				<option value="5" {:$_GET['paytype']=='2'?"selected":'';} >已退款</option>
+			</select>
+		</div>
+
+		<div class="col-md-3 col-md-offset-9" style="float:right;">
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" style="margin-right:30px;"> <i class="fa fa-search"></i>
+					查询
+				</button>
+				<!-- <button type="button" class="btn btn-primary btn-sm" id="order_exp"> <i class="glyphicon glyphicon-export"></i>
+					导出
+				</button> -->
+				<button type="reset" class="btn btn-primary"> <i class="fa fa-repeat"> </i> 重置</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<div class="row">	
+		<!-- /.panel-heading -->
+		<div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">订单列表</div>
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>编号</th>
+							<th>订单号</th>
+							<th>用户</th>
+							<th>车牌号</th>
+							<th>站点</th>									
+							<th>租车单价</th>									
+							<th>金额</th>
+							<th>支付状态</th>
+							<th>长租</th>
+							<th>下单时间</th>									
+							<th>明细</th>
+						</tr>
+					</thead>
+					<tbody>
+						<volist name="lists" id="vo">
+						<tr>
+							<td>{$vo['id']}</td>
+							<td>{$vo['order_number']}</td>
+							<td>{$vo["user_name"]}</td>
+							<td>{$vo['plate']}</td>
+							<td>{$vo['station']}</td>
+							<td>{$vo['price']}</td>									
+							<td>{$vo['payment']}</td>
+							<td>{$vo['types']}</td>
+							<td>{$vo['long']}</td>
+							<td>{$vo['add_time']|date='Y-m-d H:i:s',###}</td>								
+							<td align="center">
+								<!-- <a href="#" data-toggle="modal"  data-target="#myModal" 
+								 data-id="{$vo['id']}" data-number="{$vo['order_number']}" data-uname="{$vo['user_name']}"  
+								data-plate="{$vo['plate']}"  data-station="{$vo['station']}" 
+								 data-price="{$vo['price']}"  data-payment="{$vo['payment']}" 
+								  data-types="{$vo['types']}"  data-ordertime="{$vo['add_time']}">
+								查看</a> -->
+								<a href="#" data-toggle="modal"  data-target="#myModal" 
+								data-id="{$vo['id']}"
+								data-number="{$vo['order_number']}"	
+								data-uname="{$vo['user_name']}"
+								data-start_time="{$vo['start_time']|date='Y-m-d H:i:s',###}"
+								data-end_time="{$vo['end_time']|date='Y-m-d H:i:s',###}"
+								data-borrow_time="{$vo['borrow_time']}"
+								data-deposit="{$vo['deposit']}"
+								data-return_time="{$vo['return_time']}"						
+								data-fixed_use_time="{$vo['fixed_use_time']}"
+								data-actual_use_time="{$vo['actual_use_time']}"
+								data-excess_use_time="{:floor($vo['excess_use_time']/3600)}"  
+								data-price="{$vo['price']}"
+								data-excess="{$vo['excess']}" 
+								data-excess_fee="{$vo['excess_fee']}"								
+								data-actual_total_fee="{$vo['actual_total_fee']}"
+								data-payment="{$vo['payment']}">
+								查看</a>
+							</td>
+						</tr>
+						</volist>
+					</tbody>
+				</table>
+				<if condition="empty($lists)">
+					<div style="text-align:center;">抱歉，暂时没有您要找的内容</div>
+				</if>
+			</div>
+		</div>
+	</div>
+	</div>
+	<!-- 分页内容 -->
+	<div class="col-md-12">{$show}</div>
+	</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">订单详情</h4>
+			</div>
+			<div class="modal-body">
+			<!-- 在这里添加内容 -->
+<!-- 				<div style="align:center;">
+				<p class="text-left"><strong>用户名：</strong><small id="uname"></small></p>
+				<p class="text-left"><strong>预约取车时间：</strong><small id="start_time"></small></p>
+				<p class="text-left"><strong>预约还车时间：</strong><small id="end_time"></small></p>
+				<p class="text-left"><strong>预付定金：</strong><small id="deposit"></small>元</p>
+				<p class="text-left"><strong>实际还车时间：</strong><small id="return_time"></small></p>
+				<p class="text-left"><strong>预约用车时长：</strong><small id="fixed_use_time"></small>小时</p>
+				<p class="text-left"><strong>实际用车时长：</strong><small id="actual_use_time"></small>小时</p>
+				<p class="text-left"><strong>超额用车时长：</strong><small id="excess_use_time"></small>小时</p>
+				<p class="text-left"><strong>额定总价：</strong><small id="fixed_total_fee"></small>元</p>
+				<p class="text-left"><strong>超时单价：</strong><small id="excess"></small>元</p>
+				<p class="text-left"><strong>超时费用：</strong><small id="excess_fee"></small>元</p>
+				<p class="text-left"><strong>应付金额：</strong><small id="actual_total_fee"></small>元</p>
+				<p class="text-warning"><strong>实付金额：</strong><small id="payment"></small>元</p>
+				</div> -->
+			<ul class="">
+				<li><p class="text-left"><strong>用户名：</strong><small id="uname"></small></p></li>
+				<li><p class="text-left"><strong>预约取车时间：</strong><small id="start_time"></small></p></li>
+				<li><p class="text-left"><strong>预约还车时间：</strong><small id="end_time"></small></p></li>
+				<li><p class="text-left"><strong>实际取车时间：</strong><small id="borrow_time"></small></p></li>
+				<li><p class="text-left"><strong>实际还车时间：</strong><small id="return_time"></small></p></li>							
+				<li><p class="text-left"><strong>预约用车计时：</strong><small id="fixed_use_time"></small></p></li>
+				<li><p class="text-left"><strong>实际用车计时：</strong><small id="actual_use_time"></small></p></li>
+				<li><p class="text-left"><strong>应付金额：</strong><small id="actual_total_fee"></small>元</p></li>
+				<li><p class="text-left"><strong>预付定金：</strong><small id="deposit"></small>元</p></li>
+				<li><p class="text-warning"><strong>实付金额：</strong><small id="payment"></small>元</p></li>
+			</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+</div>
+	<!-- /.modal -->
+</block>

@@ -1,0 +1,21 @@
+﻿<extend name="Public/base" />
+<block name="title">照片详情</block>
+<block name="content">
+	<div class="row">
+		<if condition="$photoinfo['pic1']">
+		<img  class="img-responsive"  src="__ROOT__{$photoinfo['pic1']}" />
+		</if>
+
+		<if condition="$photoinfo['pic2']">
+		<img  class="img-responsive"  src="__ROOT__{$photoinfo['pic2']}" />
+		</if>
+
+		<if condition="$photoinfo['pic3']">
+		<img  class="img-responsive"  src="__ROOT__{$photoinfo['pic3']}" />
+		</if>
+
+		<if condition="$photoinfo['pic4']">
+		<img  class="img-responsive"  src="__ROOT__{$photoinfo['pic4']}" />
+		</if>
+	</div>
+</block>

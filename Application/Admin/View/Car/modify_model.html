@@ -1,0 +1,41 @@
+<extend name="Public/base" />
+<block name="title">修改型号</block>
+<block name="content">
+	<div class="row">
+		<div class="col-md-6">
+			<form action="{:U('Car/do_modify_model')}" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label>现有的品牌</label>
+					<select class="form-control" name="brand_id">
+
+						<volist name="data" id="vo">
+						<option value="{$vo['id']}" {:$data1['brand_id']==$vo['id']?'selected':'';}>{$vo['name']}</option>
+						</volist>
+
+					</select>
+				</div>
+				<br />
+				<div class="form-group">
+					<label>型号名称</label>
+					<input class="form-control" name="name" value="{$data1['name']}">
+					<p class="help-block">请输入型号名称</p>
+				</div>
+				<div class="form-group">
+					<label>车型图片</label>
+					<img  class="img-responsive" src="__ROOT__{$data1['img_url']}"/>
+				</div>
+				<div class="form-group">
+					<label>修改后的图片</label>
+					<input type="file" id="upload" name="img_url">
+				</div>
+				<div class="form-group">
+					<label>修改图片预览</label>
+					<img id="ImgPr" class="img-responsive" />
+				</div>
+				<input type="hidden" name="id" value="{$data1['id']}">
+				<button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>
+				<button type="reset" class="btn btn-outline btn-primary btn-lg btn-block">重置</button>
+			</form>
+		</div>
+	</div>
+</block>

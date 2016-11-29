@@ -1,0 +1,105 @@
+<extend name="Public/base" />
+<block name="title">租车信息</block>
+<block name="content">
+	<div class="row">
+		<form method="get" action="{:U('RentInfo/index')}">
+		
+		<div class="col-md-3">
+			<div class="form-group">
+				车牌号:
+				<input class="form-control" style="display:inline;width:70%;"  type="text" name="plate" id="plate" value="{:isset($_GET['plate'])?$_GET['plate']:'';}"></div>
+		</div>
+		
+		<div class="col-md-6">
+			租车时间：<input style="display:inline;width:35%;height:34px;" placeholder="请选择日期" class="laydate-icon form-control" name="dtpickerA" value="{:isset($_GET['dtpickerA'])?$_GET['dtpickerA']:'';}" onclick="laydate()"> 至 <input placeholder="请选择日期" class="laydate-icon form-control" name="dtpickerB" value="{:isset($_GET['dtpickerB'])?$_GET['dtpickerB']:'';}" onclick="laydate()" style="display:inline;width:35%;height:34px;">
+
+		</div>
+		<div class="col-md-3">
+			车辆状态:
+			<select style="display:inline;width:70%;" class="form-control" name="status" id="status">
+				<option value="" {:empty($_GET['status'])?"selected":'';} >全部</option>
+				<option value="0" {:$_GET['status']=='0'?"selected":'';} >未提车</option>
+				<option value="1" {:$_GET['status']=='1'?"selected":'';} >已还车</option>
+				<option value="2" {:$_GET['status']=='2'?"selected":'';} >租用中</option>
+			</select>
+		</div>
+		
+		<div class="col-md-3 col-md-offset-9">
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" style="margin-right:30px;"> <i class="fa fa-search"></i>
+					查询
+				</button>
+				<button type="reset" class="btn btn-primary"> <i class="fa fa-repeat"></i>
+					重置
+				</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<div class="row">	
+		<!-- /.panel-heading -->
+		<div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">租车信息列表</div>
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>编号</th>
+							<th>用户</th>
+							<th>手机</th>
+							<th>车牌</th>
+							<th>车型</th>
+							<th>租车点</th>
+							<th>预约提车</th>
+							<th>预约还车</th>
+							<th>订单号</th>
+							<th>状态</th>
+							<!-- <th>订单号</th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<volist name="lists" id="vo">
+						<tr>
+							<td>{$vo['id']}</td>
+							<td>{$vo['name']}</td>
+							<td>{$vo['phone']}</td>
+							<td>{$vo['plate']}</td>
+							<td>{$vo['brand']}{$vo['model']}</td>
+							
+							<td>{$vo['station']}</td>								
+							<td>{:date('Y-m-d H:i:s',$vo['start_time'])}</td>
+							<td>{$vo['end_time']|date='Y-m-d H:i:s',###}</td>
+							<td>{$vo['order_number']}</td>
+							<td>{$vo['status']}</td>
+							<!-- <td>{$vo['order_number']}</td> -->
+							
+							<!-- <td align="center">
+								<a href="#" data-toggle="modal"  data-target="#checkModal" 
+								data-id="{$vo['id']}"
+								data-number="{$vo['order_number']}"	
+								data-uname="{$vo['name']}"
+								data-initiate_time="{:date('Y-m-d H:i:s',$vo['initiate_time'])}"
+								data-suggestion="{$vo['suggestion']}"
+								data-check_time="{$_SERVER['REQUEST_TIME']|date='Y-m-d H:i:m',###}"
+								data-refund="{$vo['refund']}">
+								
+								审核</a>
+							</td> -->
+						</tr>
+						</volist>
+					</tbody>
+				</table>
+				<if condition="empty($lists)">
+					<div style="text-align:center;">抱歉，暂时没有您要找的内容</div>
+				</if>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div class="col-md-12">{$show}</div>
+	</div>
+	<!-- 分页内容 -->
+	
+</block>
